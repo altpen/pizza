@@ -15,13 +15,13 @@ function Cart() {
   });
 
   const onClearCart = () => {
-    if (window.confirm('Вы действительно хотите очистить корзину?')) {
+    if (window.confirm('Действительно хочешь очистить корзину??')) {
       dispatch(clearCart());
     }
   };
 
   const onRemoveItem = (id) => {
-    if (window.confirm('Вы действительно хотите удалить?')) {
+    if (window.confirm('Эта пицца не нужна?')) {
       dispatch(removeCartItem(id));
     }
   };
@@ -35,7 +35,7 @@ function Cart() {
   };
 
   const onClickOrder = () => {
-    console.log('ВАШ ЗАКАЗ', items);
+    console.log('Заказ', items);
   };
 
   return (
