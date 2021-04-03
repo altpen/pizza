@@ -1,30 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Button from '../Button';
 
 function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza, addedCount }) {
-  //пропсы
   const availableTypes = ['тонкое', 'традиционное'];
-  const availableSizes = [25, 30, 40];
-  const [activeType, setActiveType] = useState(types[0]);
-  const [activeSize, setActiveSize] = useState(0);//изначально 25см
+  const availableSizes = [26, 30, 40];
+
+  const [activeType, setActiveType] = React.useState(types[0]);
+  const [activeSize, setActiveSize] = React.useState(0);
 
   const onSelectType = (index) => {
     setActiveType(index);
   };
+
   const onSelectSize = (index) => {
     setActiveSize(index);
   };
+
   const onAddPizza = () => {
     const obj = {
-      id,//с пропса
+      id,
       name,
       imageUrl,
       price,
-      size: availableSizes[activeSize],//с местных хуков данные
+      size: availableSizes[activeSize],
       type: availableTypes[activeType],
-    }
+    };
     onClickAddPizza(obj);
   };
 
@@ -37,7 +39,7 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza, 
           {availableTypes.map((type, index) => (
             <li
               key={type}
-              onClick={() => onSelectType(index)}//тк онКлик не воззвращает index,тут вызываю функцию,а не просто ссылку передаю
+              onClick={() => onSelectType(index)}
               className={classNames({
                 active: activeType === index,
                 disabled: !types.includes(index),
@@ -55,7 +57,7 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza, 
                 active: activeSize === index,
                 disabled: !sizes.includes(size),
               })}>
-              {size} см
+              {size} см.
             </li>
           ))}
         </ul>
@@ -76,29 +78,27 @@ function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza, 
           </svg>
           <span>Добавить</span>
           {addedCount && <i>{addedCount}</i>}
-          {/* колво пицц на батоне */}
         </Button>
       </div>
     </div>
   );
 }
 
-//проверка типов, дополнительно
 PizzaBlock.propTypes = {
-  name: PropTypes.string.isRequired, //name ОБЯЗАТЕЛЬНО ДОЛЖЕН БЫТЬ СТРОЧКОЙ,если передам нестрочку в name,он выведет ошибку
-  imageUrl: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  types: PropTypes.arrayOf(PropTypes.number).isRequired, //обязательно массив чисел должен быть
-  sizes: PropTypes.arrayOf(PropTypes.number).isRequired, //обязательно массив чисел должен быть
+  name: PropTypes.string,
+  imageUrl: PropTypes.string,
+  price: PropTypes.number,
+  types: PropTypes.arrayOf(PropTypes.number),
+  sizes: PropTypes.arrayOf(PropTypes.number),
   onClickAddPizza: PropTypes.func,
   addedCount: PropTypes.number,
 };
 
 PizzaBlock.defaultProps = {
-  sizes: [],
-  price: 0,
   name: '---',
-  types: [], //если не указан type, то возвр пустой массив вместо него
+  price: 0,
+  types: [],
+  sizes: [],
 };
 
 export default PizzaBlock;

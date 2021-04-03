@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './Button';
 
-function CartItem({ id, name, type, size, totalPrice, totalCount, onRemove, onMinus, onPlus }) {
+const CartItem = ({ id, name, type, size, totalPrice, totalCount, onRemove, onMinus, onPlus }) => {
   const handleRemoveClick = () => {
     onRemove(id);
   };
@@ -94,6 +94,6 @@ function CartItem({ id, name, type, size, totalPrice, totalCount, onRemove, onMi
       </div>
     </div>
   );
-}
+};
 
 export default CartItem;

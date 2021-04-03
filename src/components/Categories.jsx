@@ -10,17 +10,12 @@ const Categories = React.memo(function Categories({ activeCategory, items, onCli
           onClick={() => onClickCategory(null)}>
           Все
         </li>
-        {/* изначальное состояние null,и вот в li ВСЕ задается класс active и он красится в черный, тк ему задано 
-          значние по умолчанию -null */}
         {items &&
-          items.map((
-            name,
-            index, //если items не пустой
-          ) => (
+          items.map((name, index) => (
             <li
               className={activeCategory === index ? 'active' : ''}
-              onClick={() => onClickCategory(index)} //сюда не просто передана ссыла функции,а вызвана,тк тут принимает event
-              key={name}>
+              onClick={() => onClickCategory(index)}
+              key={`${name}_${index}`}>
               {name}
             </li>
           ))}
@@ -30,8 +25,8 @@ const Categories = React.memo(function Categories({ activeCategory, items, onCli
 });
 
 Categories.propTypes = {
-  // activeCategory: PropTypes.oneOf([PropTypes.number, null]),//либо числа,либо нал
-  items: PropTypes.arrayOf(PropTypes.string).isRequired, //только массив из строк('Мясные', 'Вегетарианская' и тд)
+  // activeCategory: PropTypes.oneOf([PropTypes.number, null]),
+  items: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickCategory: PropTypes.func.isRequired,
 };
 

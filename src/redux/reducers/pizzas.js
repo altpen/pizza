@@ -1,26 +1,26 @@
-const initialState = {//изначально в массиве нет пицц
+const initialState = {
   items: [],
-  isLoaded: false,//пицц ещё нет,они загружаются с сервера..изначально fakse,там их нет
+  isLoaded: false,
 };
 
-const pizzas = (state = initialState, action) => {//это reducer для редакса
+const pizzas = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_PIZZAS'://при вызове dispatch если type будет SET_PIZZAS...объект наполняется пиццами
+    case 'SET_PIZZAS':
       return {
         ...state,
-        items: action.payload,//массив пиц
-        isLoaded: true,//тк пиццы получены с сервера,тру
+        items: action.payload,
+        isLoaded: true,
       };
-    
-    case 'SET_LOADED'://если приходит сетЛоадед,меняю ИсЛоад
+
+    case 'SET_LOADED':
       return {
         ...state,
         isLoaded: action.payload,
       };
-  
+
     default:
-      return state;//если ничего не меняется,возвращаю пустой массив без пицц
-    }
+      return state;
+  }
 };
 
 export default pizzas;
